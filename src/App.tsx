@@ -1,4 +1,4 @@
-import { Phone, ChevronDown, Check, Users, Clock, Star, ArrowRight, Award, TrendingUp, Shield, MapPin, Calendar, MessageCircle, Search, FileCheck, Rocket, Building2 } from 'lucide-react';
+import { Phone, ChevronDown, Check, Users, Clock, Star, ArrowRight, Award, TrendingUp, Shield, MapPin, MessageCircle, Search, FileCheck, Rocket, Building2, Briefcase, UserCheck, Send, Package, Boxes, Factory, HardHat, Utensils, Target, Zap, Calendar, Quote } from 'lucide-react';
 import { useState } from 'react';
 import imgMaleLoadersInAWarehouseSlavicAppearance from "figma:asset/bc1ea0ab6a88bdad43fa5498ebffdf936df417e1.png";
 import imgWarehousePickersRussianAppearance from "figma:asset/94f0e5a30c3fcfdd04b79580f36d5a9fa6ccebcb.png";
@@ -8,36 +8,128 @@ import imgPhotosOfAGirlFromTechnicalSupportSittingInAnOfficeWearingHeadphonesWit
 import imgPhotosOfAGirlFromTechnicalSupportSittingInAnOfficeWearingHeadphonesWithAMicrophoneGreenBackground1 from "figma:asset/7e45f05f31f4c5b27a35bb0c65065f5389916704.png";
 import imgRussiaMap from "figma:asset/dff52f181b3c9958373b1f45a3ee8a70902fbde2.png";
 import JobPage from './JobPage';
+import ServicesPage from './ServicesPage';
+
+// Import Figma images
+import imgWarehouseIllustration from "figma:asset/41842d3ef5209dc14da94b085cb14546ba4aff6d.png";
+import imgRectangle1492 from "figma:asset/1de697f5e691c20ad6c23d73033fad1f71b0e8f2.png";
+import imgRectangle1493 from "figma:asset/e346651a116b89fc0b117847835da3d48c701b5f.png";
+import imgRectangle1494 from "figma:asset/c2421eed3e357d5e2c5b99f2b8d7483888205985.png";
+import imgRectangle1496 from "figma:asset/c08c71bd2791e1db76e5c4ab276da5c6c56afd09.png";
+import imgRectangle1497 from "figma:asset/c3476833b024e17b72eb51e63843d42ca2e15855.png";
+import imgRectangle1498 from "figma:asset/4ff9dc43488983a06c47aa17e8ad6b4e601142a2.png";
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'job'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'job' | 'services'>('home');
 
   if (currentPage === 'job') {
     return <JobPage onBack={() => setCurrentPage('home')} />;
   }
 
+  if (currentPage === 'services') {
+    return <ServicesPage onBack={() => setCurrentPage('home')} onJobClick={() => setCurrentPage('job')} />;
+  }
+
   const positions = [
-    { name: 'Упаковщики', rate: '400', image: imgWarehousePickersRussianAppearance, tags: ['Опыт не требуется', 'Гибкий график'] },
-    { name: 'Грузчики', rate: '400', image: imgMaleLoadersInAWarehouseSlavicAppearance, tags: ['Быстрый выход', 'Физическая работа'] },
-    { name: 'Комплектовщики', rate: '400', image: imgForkliftOperatorsInAWarehouseRussianAppearance, tags: ['С опытом', 'Стабильность'] },
-    { name: 'Кладовщики', rate: '450', image: imgGeneralWorkersInAWarehouseRussianAppearance, tags: ['1С: Склад', 'Ответственность'] },
+    { name: 'Упаковщики', rate: '400', image: imgWarehousePickersRussianAppearance, description: 'Опыт не требуется', icon: Package },
+    { name: 'Грузчики', rate: '400', image: imgMaleLoadersInAWarehouseSlavicAppearance, description: 'Быстрый выход от 1 дня', icon: Boxes },
+    { name: 'Комплектовщики', rate: '400', image: imgForkliftOperatorsInAWarehouseRussianAppearance, description: 'С опытом работы', icon: UserCheck },
+    { name: 'Кладовщики', rate: '450', image: imgGeneralWorkersInAWarehouseRussianAppearance, description: 'Знание 1С: Склад', icon: Briefcase },
   ];
 
-  const allPositionChips = [
-    'Упаковщики', 'Грузчики', 'Комплектовщики', 'Кладовщики', 'Сортировщики',
-    'Операторы погрузчика', 'Приемщики товара', 'Маркировщики', 'Паллетоукладчики',
-    'Стропальщики', 'Фасовщики', 'Водители электропогрузчика'
+  const industries = [
+    { icon: Boxes, title: 'Склады и логистика', count: '150+ проектов', color: 'bg-yellow-400' },
+    { icon: Factory, title: 'Производство', count: '90+ проектов', color: 'bg-slate-900' },
+    { icon: HardHat, title: 'Строительство', count: '60+ проектов', color: 'bg-yellow-400' },
+    { icon: Utensils, title: 'Пищевая промышленность', count: '40+ проектов', color: 'bg-slate-900' },
+  ];
+
+  const benefits = [
+    {
+      icon: Clock,
+      title: 'Быстрый вывод персонала',
+      description: 'От 1 дня до вых��да на объект. Экстренная замена за 24 часа.',
+      stat: 'От 1 дня'
+    },
+    {
+      icon: Shield,
+      title: 'Полное кадровое оформление',
+      description: 'Берём на себя все документы, договоры и отчётность.',
+      stat: '100% легально'
+    },
+    {
+      icon: Users,
+      title: 'Проверенная база кандидатов',
+      description: 'Более 100 000 специалистов разных квалификаций.',
+      stat: '100 000+'
+    },
+    {
+      icon: Target,
+      title: 'Гарантия качества',
+      description: 'Бесплатная замена сотрудника, если не подошёл.',
+      stat: '24/7'
+    }
+  ];
+
+  const caseStudies = [
+    {
+      image: imgRectangle1492,
+      company: 'Wildberries',
+      project: 'Вывод 80 упаковщиков',
+      result: 'Обработка 15 000 заказов в день',
+      period: '6 месяцев',
+    },
+    {
+      image: imgRectangle1493,
+      company: 'Ozon',
+      project: '50 комплектовщиков',
+      result: 'Увеличение скорости на 40%',
+      period: '12 месяцев',
+    },
+    {
+      image: imgRectangle1494,
+      company: 'X5 Retail Group',
+      project: '30 кладовщиков',
+      result: 'Оптимизация склада',
+      period: '8 месяцев',
+    },
+  ];
+
+  const testimonials = [
+    {
+      image: imgRectangle1496,
+      name: 'Алексей Морозов',
+      position: 'Руководитель логистического центра',
+      company: 'Wildberries',
+      text: 'Работаем со StaffPro уже год. Отличная команда, всегда оперативно решают наши задачи. Персонал выводят быстро и качественно.',
+      rating: 5
+    },
+    {
+      image: imgRectangle1497,
+      name: 'Елена Соколова',
+      position: 'HR-директор',
+      company: 'Ozon',
+      text: 'Очень довольны сотрудничеством. Профессиональный подход, все документы в порядке. Рекомендуем!',
+      rating: 5
+    },
+    {
+      image: imgRectangle1498,
+      name: 'Дмитрий Васильев',
+      position: 'Менеджер по операциям',
+      company: 'X5 Retail',
+      text: 'Лучший партнёр по подбору складского персонала. Всегда на связи, решают проблемы в моменте.',
+      rating: 5
+    },
   ];
 
   return (
     <div className="min-h-screen bg-white font-['Inter',sans-serif]">
       {/* Header */}
       <header className="bg-white border-b border-slate-200 sticky top-0 z-50">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-8">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
           <div className="flex items-center justify-between h-20">
-            {/* Logo */}
             <div className="flex items-center gap-6">
-              <div className="flex items-center gap-2.5 cursor-pointer">
+              <div className="flex items-center gap-3 cursor-pointer">
                 <div className="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center">
                   <span className="text-yellow-400 text-xl font-bold">S</span>
                 </div>
@@ -45,26 +137,22 @@ export default function App() {
               </div>
               <div className="hidden lg:flex items-center gap-2 bg-slate-50 px-4 py-2 rounded-xl cursor-pointer hover:bg-slate-100 transition-colors">
                 <MapPin className="w-4 h-4 text-slate-500" />
-                <span className="text-sm text-slate-700 font-medium">Санкт-Петербург</span>
+                <span className="text-sm text-slate-700 font-medium">Москва</span>
                 <ChevronDown className="w-4 h-4 text-slate-500" />
               </div>
             </div>
 
-            {/* Navigation - Desktop */}
-            <nav className="hidden lg:flex items-center gap-8">
-              <a href="#" className="text-sm text-slate-900 font-medium cursor-pointer hover:text-yellow-500 transition-colors">
-                Услуги
-              </a>
-              <a href="#" className="text-sm text-slate-600 hover:text-slate-900 transition-colors cursor-pointer">Персонал</a>
-              <a href="#" className="text-sm text-slate-600 hover:text-slate-900 transition-colors cursor-pointer">Для бизнеса</a>
-              <a href="#" className="text-sm text-slate-600 hover:text-slate-900 transition-colors cursor-pointer">Новости</a>
-              <a href="#" className="text-sm text-slate-600 hover:text-slate-900 transition-colors cursor-pointer">Контакты</a>
+            <nav className="hidden lg:flex items-center gap-10">
+              <button onClick={() => setCurrentPage('services')} className="text-sm text-slate-900 font-medium cursor-pointer hover:text-yellow-500 transition-colors bg-transparent border-none">Услуги</button>
+              <button onClick={() => setCurrentPage('job')} className="text-sm text-slate-600 hover:text-slate-900 transition-colors cursor-pointer bg-transparent border-none">Персонал</button>
+              <a href="#cases" className="text-sm text-slate-600 hover:text-slate-900 transition-colors cursor-pointer">Кейсы</a>
+              <a href="#about" className="text-sm text-slate-600 hover:text-slate-900 transition-colors cursor-pointer">О нас</a>
+              <a href="#contacts" className="text-sm text-slate-600 hover:text-slate-900 transition-colors cursor-pointer">Контакты</a>
             </nav>
 
-            {/* Right Side */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-5">
               <span className="hidden md:block font-semibold text-slate-900">8 800 000 00 00</span>
-              <button className="bg-yellow-400 text-slate-900 px-6 py-2.5 rounded-xl hover:bg-yellow-500 transition-all font-semibold cursor-pointer">
+              <button className="bg-yellow-400 text-slate-900 px-7 py-3 rounded-xl hover:bg-yellow-500 transition-all font-semibold cursor-pointer">
                 Оставить заявку
               </button>
             </div>
@@ -72,567 +160,598 @@ export default function App() {
         </div>
       </header>
 
-      {/* Breadcrumbs */}
-      <div className="bg-white border-b border-slate-100">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-8 py-3">
-          <p className="text-slate-500 text-xs md:text-sm">Главная - Подбор персонала на склад</p>
-        </div>
-      </div>
+      {/* Hero Section */}
+      <section className="bg-black text-white py-16 lg:py-20 relative overflow-hidden">
+        {/* Ambient glow */}
+        <div className="absolute top-1/2 right-1/4 w-[600px] h-[600px] bg-yellow-400/20 rounded-full blur-[120px] -translate-y-1/2" />
+        
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Left: Content */}
+            <div className="max-w-xl">
+              {/* Trust badge */}
+              <div className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-sm border border-white/10 px-4 py-2.5 rounded-full mb-6">
+                <div className="flex -space-x-2">
+                  <div className="w-6 h-6 rounded-full bg-yellow-400 border-2 border-black flex items-center justify-center text-xs font-bold text-black">W</div>
+                  <div className="w-6 h-6 rounded-full bg-yellow-400 border-2 border-black flex items-center justify-center text-xs font-bold text-black">O</div>
+                  <div className="w-6 h-6 rounded-full bg-yellow-400 border-2 border-black flex items-center justify-center text-xs font-bold text-black">X5</div>
+                </div>
+                <span className="text-sm text-slate-300">Работают с нами</span>
+                <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
+              </div>
 
-      {/* Main Content */}
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-8 py-6 lg:py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-6 lg:gap-8">
-          {/* Left Content */}
-          <div className="space-y-6 lg:space-y-8">
-            {/* Hero Section */}
-            <div className="bg-white rounded-2xl lg:rounded-3xl overflow-hidden">
-              <div className="relative h-64 md:h-80 lg:h-96">
+              <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-[1.1]">
+                Предоставление персонала <br />
+                <span className="text-yellow-400">в Москве</span>
+              </h1>
+
+              <p className="text-xl text-slate-300 mb-8 leading-relaxed">
+                Аутстаффинг для бизнеса любого масштаба — от склада до производства
+              </p>
+
+              {/* Feature chips */}
+              <div className="flex flex-wrap gap-2 mb-8">
+                <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-2 rounded-lg">
+                  <Clock className="w-4 h-4 text-yellow-400" />
+                  <span className="text-sm font-medium">От 24 часов</span>
+                </div>
+                <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-2 rounded-lg">
+                  <Shield className="w-4 h-4 text-yellow-400" />
+                  <span className="text-sm font-medium">100% легально</span>
+                </div>
+                <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-2 rounded-lg">
+                  <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+                  <span className="text-sm font-medium">Рейтинг 4.9</span>
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4 mb-10">
+                <button className="bg-yellow-400 text-black px-10 py-4 rounded-xl hover:bg-yellow-500 transition-all font-bold text-lg cursor-pointer inline-flex items-center justify-center gap-2">
+                  Получить персонал
+                  <ArrowRight className="w-5 h-5" />
+                </button>
+                <button className="bg-white/5 border-2 border-white/10 text-white px-10 py-4 rounded-xl hover:bg-white/10 transition-all font-semibold text-lg cursor-pointer">
+                  Рассчитать стоимость
+                </button>
+              </div>
+
+              {/* Mini stats */}
+              <div className="grid grid-cols-3 gap-6 pt-6 border-t border-white/10">
+                <div>
+                  <div className="text-2xl font-bold text-yellow-400 mb-1">25 000+</div>
+                  <div className="text-xs text-slate-400">Сотрудников выведено</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-yellow-400 mb-1">500+</div>
+                  <div className="text-xs text-slate-400">Проектов</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-yellow-400 mb-1">12 лет</div>
+                  <div className="text-xs text-slate-400">На рынке</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: Illustration with floating elements */}
+            <div className="relative">
+              {/* Main illustration with glow */}
+              <div className="relative">
+                <div className="absolute inset-0 bg-yellow-400/30 rounded-full blur-[80px]" />
                 <img 
-                  src={imgMaleLoadersInAWarehouseSlavicAppearance}
-                  alt="Warehouse team"
-                  className="w-full h-full object-cover"
+                  src={imgWarehouseIllustration}
+                  alt="Warehouse illustration"
+                  className="w-full h-auto max-w-2xl mx-auto relative z-10"
                 />
-                
-                {/* Floating badges */}
-                <div className="absolute top-4 left-4 lg:top-6 lg:left-6 flex gap-2">
-                  <div className="bg-blue-600 text-white px-2.5 py-1.5 lg:px-3 rounded-full text-xs lg:text-sm flex items-center gap-1.5 shadow-lg">
-                    <Star className="w-3 h-3 lg:w-4 lg:h-4 fill-amber-400 text-amber-400" />
-                    Топ-услуга
+              </div>
+
+              {/* Floating card 1 - Top Left */}
+              <div className="hidden lg:block absolute top-8 -left-4 bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl p-4 shadow-2xl animate-float">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center">
+                    <Check className="w-5 h-5 text-green-400" />
                   </div>
-                  <div className="bg-green-500 text-white px-2.5 py-1.5 lg:px-3 rounded-full text-xs lg:text-sm flex items-center gap-1.5 shadow-lg">
-                    <div className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
-                    Быстрый подбор
+                  <div>
+                    <div className="text-sm font-bold">Быстрый выход</div>
+                    <div className="text-xs text-slate-400">От 1 дня</div>
                   </div>
                 </div>
               </div>
-              
-              <div className="p-6 lg:p-10">
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 text-slate-900 leading-tight">
-                  Подбор персонала на склад <br className="hidden md:block" />в <span className="text-yellow-500">Москве</span>
-                </h1>
-                
-                <div className="flex flex-wrap items-center gap-2 mb-6">
-                  <div className="flex items-center gap-1 text-xs md:text-sm font-medium text-amber-600">
-                    <Star className="w-3.5 h-3.5 md:w-4 md:h-4 fill-amber-500 text-amber-500" />
-                    4.9 рейтинг
+
+              {/* Floating card 2 - Top Right */}
+              <div className="hidden lg:block absolute top-20 -right-8 bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl p-4 shadow-2xl animate-float" style={{ animationDelay: '1s' }}>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-yellow-500/20 flex items-center justify-center">
+                    <Users className="w-5 h-5 text-yellow-400" />
                   </div>
-                  <div className="text-xs md:text-sm font-medium text-slate-900">
-                    500+ проектов
-                  </div>
-                  <div className="text-sm text-slate-400">•</div>
-                  <div className="text-xs md:text-sm font-medium text-slate-900 flex items-center gap-1">
-                    <Check className="w-3.5 h-3.5 md:w-4 md:h-4" />
-                    Проверено
+                  <div>
+                    <div className="text-sm font-bold">100 000+</div>
+                    <div className="text-xs text-slate-400">База кандидатов</div>
                   </div>
                 </div>
+              </div>
+
+              {/* Floating card 3 - Bottom Left */}
+              <div className="hidden lg:block absolute bottom-12 -left-8 bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl p-4 shadow-2xl animate-float" style={{ animationDelay: '2s' }}>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">
+                    <Award className="w-5 h-5 text-blue-400" />
+                  </div>
+                  <div>
+                    <div className="text-sm font-bold">Гарантия</div>
+                    <div className="text-xs text-slate-400">Замена 24/7</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Floating card 4 - Bottom Right */}
+              <div className="hidden lg:block absolute bottom-20 right-0 bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl px-4 py-2 shadow-2xl">
+                <div className="flex items-center gap-2">
+                  <div className="flex gap-0.5">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+                    ))}
+                  </div>
+                  <span className="text-xs font-semibold">4.9 рейтинг</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Add custom animation */}
+        <style>{`
+          @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+          }
+          .animate-float {
+            animation: float 3s ease-in-out infinite;
+          }
+        `}</style>
+      </section>
+
+      {/* Stats Bar */}
+      <section className="bg-slate-50 py-12 border-y border-slate-200">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="text-center lg:text-left">
+              <div className="text-4xl font-bold text-slate-900 mb-2">25 000+</div>
+              <div className="text-slate-600">Выведено сотрудников</div>
+            </div>
+            <div className="text-center lg:text-left">
+              <div className="text-4xl font-bold text-slate-900 mb-2">500+</div>
+              <div className="text-slate-600">Завершённых проектов</div>
+            </div>
+            <div className="text-center lg:text-left">
+              <div className="text-4xl font-bold text-slate-900 mb-2">12 лет</div>
+              <div className="text-slate-600">На рынке</div>
+            </div>
+            <div className="text-center lg:text-left">
+              <div className="text-4xl font-bold text-yellow-500 mb-2">4.9</div>
+              <div className="text-slate-600">Средний рейтинг</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Industries */}
+      <section id="services" className="py-20 lg:py-28">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6">Отрасли, в которых мы работаем</h2>
+            <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+              Предоставляем персонал для различных сфер бизнеса по всей России
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {industries.map((industry, idx) => (
+              <div key={idx} className="group bg-white rounded-2xl p-8 hover:shadow-2xl transition-all duration-300 border-2 border-slate-100 hover:border-yellow-400 cursor-pointer">
+                <div className={`w-14 h-14 rounded-2xl ${industry.color} flex items-center justify-center mb-6`}>
+                  <industry.icon className={`w-7 h-7 ${industry.color === 'bg-yellow-400' ? 'text-slate-900' : 'text-yellow-400'}`} />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">{industry.title}</h3>
+                <p className="text-slate-600 font-medium">{industry.count}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits */}
+      <section className="py-20 lg:py-28 bg-slate-50">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6">Почему выбирают нас</h2>
+            <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+              Мы предоставляем полный спектр услуг по аутстаффингу персонала
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {benefits.map((benefit, idx) => (
+              <div key={idx} className="bg-white rounded-2xl p-8 hover:shadow-xl transition-all">
+                <div className="w-16 h-16 rounded-2xl bg-slate-900 flex items-center justify-center mb-6">
+                  <benefit.icon className="w-8 h-8 text-yellow-400" />
+                </div>
+                <div className="text-3xl font-bold text-yellow-500 mb-4">{benefit.stat}</div>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">{benefit.title}</h3>
+                <p className="text-slate-600 leading-relaxed">{benefit.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Positions */}
+      <section id="positions" className="py-20 lg:py-28">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+          <div className="flex items-end justify-between mb-12">
+            <div>
+              <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-4">Популярные должности</h2>
+              <p className="text-xl text-slate-600">Актуальные тарифы на сегодня</p>
+            </div>
+            <button onClick={() => setCurrentPage('job')} className="hidden lg:flex text-slate-900 font-semibold hover:text-yellow-500 transition-colors cursor-pointer items-center gap-2 bg-transparent border-none">
+              Все должности
+              <ArrowRight className="w-5 h-5" />
+            </button>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {positions.map((position, idx) => (
+              <div key={idx} className="group bg-white rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 border-2 border-slate-100 hover:border-yellow-400 cursor-pointer" onClick={() => setCurrentPage('job')}>
+                <div className="h-56 relative overflow-hidden">
+                  <img 
+                    src={position.image}
+                    alt={position.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute top-4 right-4 bg-yellow-400 text-slate-900 px-3 py-1.5 rounded-lg font-bold text-sm">
+                    от {position.rate} ₽/час
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-slate-900 mb-2">{position.name}</h3>
+                  <p className="text-slate-600 mb-4">{position.description}</p>
+                  <button className="w-full bg-yellow-400 text-slate-900 py-3 rounded-xl hover:bg-yellow-500 transition-all font-semibold">
+                    Подробнее
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How We Work */}
+      <section className="py-20 lg:py-28 bg-slate-900 text-white">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold mb-6">Как мы работаем</h2>
+            <p className="text-xl text-slate-300 max-w-2xl mx-auto">
+              Простой и прозрачный процесс от заявки до выхода персонала
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+            {[
+              { icon: Search, title: 'Заявка', desc: 'Оставляете заявку онлайн или по телефону', number: '01' },
+              { icon: Users, title: 'Подбор', desc: 'Подбираем кандидатов из нашей базы', number: '02' },
+              { icon: FileCheck, title: 'Оформление', desc: 'Оформляем все документы и договоры', number: '03' },
+              { icon: Rocket, title: 'Выход', desc: 'Персонал выходит на ваш объект', number: '04' },
+            ].map((step, idx) => (
+              <div key={idx} className="relative">
+                <div className="bg-white/5 rounded-2xl p-8 hover:bg-white/10 transition-all relative z-10">
+                  <div className="flex items-center justify-between mb-6 relative">
+                    <div className="w-14 h-14 rounded-2xl bg-yellow-400 flex items-center justify-center relative z-20">
+                      <step.icon className="w-7 h-7 text-slate-900" />
+                    </div>
+                    <span className="text-5xl font-bold text-yellow-400/20">{step.number}</span>
+                    
+                    {/* Connecting line under icon */}
+                    {idx < 3 && (
+                      <div className="hidden lg:block absolute left-[70px] top-[28px] h-0.5 w-[calc(100%+32px+64px)] bg-yellow-400/20 z-0" 
+                           style={{ 
+                             borderTop: '2px dashed rgba(251, 191, 36, 0.2)',
+                             background: 'none'
+                           }} 
+                      />
+                    )}
+                  </div>
+                  <h3 className="text-xl font-bold mb-3">{step.title}</h3>
+                  <p className="text-slate-400">{step.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-16 text-center">
+            <button className="bg-yellow-400 text-slate-900 px-10 py-5 rounded-2xl hover:bg-yellow-500 transition-all font-bold text-lg cursor-pointer">
+              Начать работу
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Case Studies */}
+      <section id="cases" className="py-20 lg:py-28">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6">Успешные кейсы</h2>
+            <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+              Реальные результаты наших клиентов
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {caseStudies.map((caseItem, idx) => (
+              <div key={idx} className="group bg-white rounded-2xl overflow-hidden hover:shadow-2xl transition-all border-2 border-slate-100 cursor-pointer">
+                <div className="h-64 relative overflow-hidden">
+                  <img 
+                    src={caseItem.image}
+                    alt={caseItem.company}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <div className="p-8">
+                  <div className="text-sm font-bold text-yellow-500 mb-3">{caseItem.company}</div>
+                  <h3 className="text-2xl font-bold text-slate-900 mb-4">{caseItem.project}</h3>
+                  <div className="space-y-2 mb-6">
+                    <div className="flex items-center gap-2 text-slate-600">
+                      <Check className="w-5 h-5 text-yellow-500" />
+                      <span>{caseItem.result}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-slate-600">
+                      <Calendar className="w-5 h-5 text-slate-400" />
+                      <span>Длительность: {caseItem.period}</span>
+                    </div>
+                  </div>
+                  <button className="text-slate-900 font-semibold hover:text-yellow-500 transition-colors flex items-center gap-2 cursor-pointer bg-transparent border-none">
+                    Читать кейс
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-20 lg:py-28 bg-slate-50">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6">Отзывы клиентов</h2>
+            <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+              Что говорят о нас наши партнёры
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {testimonials.map((testimonial, idx) => (
+              <div key={idx} className="bg-white rounded-2xl p-8 hover:shadow-xl transition-all">
+                <Quote className="w-10 h-10 text-yellow-400 mb-6" />
                 
-                <p className="text-base md:text-lg lg:text-xl text-slate-600 mb-8">
-                  Полностью берем на себя подбор, проверку и кадровое оформление персонала.
+                <div className="flex gap-1 mb-6">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  ))}
+                </div>
+
+                <p className="text-slate-700 mb-8 leading-relaxed text-lg">
+                  {testimonial.text}
                 </p>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 mb-8">
-                  <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 rounded-full bg-slate-900 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <Check className="w-4 h-4 text-yellow-400" />
-                    </div>
-                    <div>
-                      <span className="text-sm md:text-base text-slate-900">Вывод до <span className="font-semibold">80 сотрудников</span></span>
-                      <div className="text-xs text-slate-500 mt-0.5">одновременно на объект</div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 rounded-full bg-slate-900 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <Check className="w-4 h-4 text-yellow-400" />
-                    </div>
-                    <div>
-                      <span className="text-sm md:text-base text-slate-900">Более <span className="font-semibold">100 000</span> кандидатов</span>
-                      <div className="text-xs text-slate-500 mt-0.5">в нашей базе данных</div>
-                    </div>
+                <div className="flex items-center gap-4 pt-6 border-t border-slate-100">
+                  <img 
+                    src={testimonial.image}
+                    alt={testimonial.name}
+                    className="w-14 h-14 rounded-full object-cover"
+                  />
+                  <div>
+                    <div className="font-bold text-slate-900">{testimonial.name}</div>
+                    <div className="text-sm text-slate-600">{testimonial.position}</div>
+                    <div className="text-sm font-semibold text-yellow-500">{testimonial.company}</div>
                   </div>
                 </div>
-
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 lg:gap-4">
-                  <button className="bg-yellow-400 text-slate-900 px-6 lg:px-8 py-3 lg:py-4 rounded-xl hover:bg-yellow-500 transition-all flex items-center justify-center gap-2 group text-sm md:text-base cursor-pointer font-semibold">
-                    Рассчитать стоимость
-                    <ArrowRight className="w-4 h-4 lg:w-5 lg:h-5 group-hover:translate-x-1 transition-transform" />
-                  </button>
-                  <button className="bg-white text-slate-900 px-6 lg:px-8 py-3 lg:py-4 rounded-xl hover:bg-slate-100 transition-all flex items-center justify-center gap-2 text-sm md:text-base cursor-pointer font-semibold border-2 border-slate-200">
-                    <Phone className="w-4 h-4 lg:w-5 lg:h-5" />
-                    <span className="hidden sm:inline">8 800 000 00 00</span>
-                    <span className="sm:hidden">Позвонить</span>
-                  </button>
-                </div>
-                
-                <div className="flex items-center gap-2 mt-4 text-slate-500 text-xs md:text-sm">
-                  <Clock className="w-3.5 h-3.5 md:w-4 md:h-4" />
-                  Ответим в течение 15 минут
-                </div>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Geography */}
+      <section className="py-20 lg:py-28">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6">География присутствия</h2>
+            <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+              Работаем в 85 городах России
+            </p>
+          </div>
+
+          <div className="bg-slate-50 rounded-3xl p-12 lg:p-16">
+            <div className="mb-12">
+              <img 
+                src={imgRussiaMap}
+                alt="Russia Map"
+                className="w-full h-auto"
+              />
             </div>
 
-            {/* Statistics */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-6">
-              <div className="bg-white rounded-xl lg:rounded-2xl p-4 lg:p-6">
-                <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-lg lg:rounded-xl flex items-center justify-center mb-3 lg:mb-4" style={{
-                  background: 'linear-gradient(135deg, #3b82f6 0%, #6366f1 100%)'
-                }}>
-                  <Users className="w-5 h-5 lg:w-6 lg:h-6 text-white" />
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+              <div className="text-center">
+                <div className="w-14 h-14 rounded-2xl bg-slate-900 flex items-center justify-center mx-auto mb-4">
+                  <Building2 className="w-7 h-7 text-yellow-400" />
                 </div>
-                <div className="text-2xl lg:text-3xl font-bold mb-1 text-slate-900">500+</div>
-                <div className="text-xs lg:text-sm text-slate-600 mb-2">Проектов завершено</div>
-                <div className="flex items-center gap-1 text-xs text-green-600">
-                  <TrendingUp className="w-3 h-3" />
-                  +12% за мсяц
-                </div>
+                <div className="text-4xl font-bold text-slate-900 mb-2">85</div>
+                <div className="text-slate-600">Городов России</div>
               </div>
-              
-              <div className="bg-white rounded-xl lg:rounded-2xl p-4 lg:p-6">
-                <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-lg lg:rounded-xl flex items-center justify-center mb-3 lg:mb-4" style={{
-                  background: 'linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%)'
-                }}>
-                  <Award className="w-5 h-5 lg:w-6 lg:h-6 text-white" />
+              <div className="text-center">
+                <div className="w-14 h-14 rounded-2xl bg-slate-900 flex items-center justify-center mx-auto mb-4">
+                  <Users className="w-7 h-7 text-yellow-400" />
                 </div>
-                <div className="text-2xl lg:text-3xl font-bold mb-1 text-slate-900">12 лет</div>
-                <div className="text-xs lg:text-sm text-slate-600 mb-2">На рынке</div>
-                <div className="flex items-center gap-1 text-xs text-slate-500">
-                  <Check className="w-3 h-3" />
-                  С 2013 года
-                </div>
+                <div className="text-4xl font-bold text-slate-900 mb-2">25 000+</div>
+                <div className="text-slate-600">Выведено сотрудников</div>
               </div>
-              
-              <div className="bg-white rounded-xl lg:rounded-2xl p-4 lg:p-6">
-                <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-lg lg:rounded-xl flex items-center justify-center mb-3 lg:mb-4" style={{
-                  background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)'
-                }}>
-                  <Star className="w-5 h-5 lg:w-6 lg:h-6 text-white" />
+              <div className="text-center">
+                <div className="w-14 h-14 rounded-2xl bg-slate-900 flex items-center justify-center mx-auto mb-4">
+                  <Award className="w-7 h-7 text-yellow-400" />
                 </div>
-                <div className="text-2xl lg:text-3xl font-bold mb-1 text-slate-900">4.9</div>
-                <div className="text-xs lg:text-sm text-slate-600 mb-2">Средний рейтинг</div>
-                <div className="flex items-center gap-0.5 text-xs">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-3 h-3 fill-amber-400 text-amber-400" />
-                  ))}
-                </div>
+                <div className="text-4xl font-bold text-slate-900 mb-2">500+</div>
+                <div className="text-slate-600">Проектов</div>
               </div>
-              
-              <div className="bg-white rounded-xl lg:rounded-2xl p-4 lg:p-6">
-                <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-lg lg:rounded-xl flex items-center justify-center mb-3 lg:mb-4" style={{
-                  background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)'
-                }}>
-                  <Shield className="w-5 h-5 lg:w-6 lg:h-6 text-white" />
+              <div className="text-center">
+                <div className="w-14 h-14 rounded-2xl bg-yellow-400 flex items-center justify-center mx-auto mb-4">
+                  <TrendingUp className="w-7 h-7 text-slate-900" />
                 </div>
-                <div className="text-2xl lg:text-3xl font-bold mb-1 text-slate-900">24/7</div>
-                <div className="text-xs lg:text-sm text-slate-600 mb-2">Поддержка клиентов</div>
-                <div className="flex items-center gap-1 text-xs text-green-600">
-                  <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
-                  Онлайн сейчас
-                </div>
+                <div className="text-4xl font-bold text-yellow-500 mb-2">+35%</div>
+                <div className="text-slate-600">Рост в 2024</div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
 
-            {/* Services Section */}
-            <div className="bg-white rounded-2xl lg:rounded-3xl p-6 lg:p-10">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6 lg:mb-8">
-                <h2 className="text-2xl md:text-3xl font-bold text-slate-900">Должности и тарифы</h2>
-                <div className="flex items-center gap-2 text-xs md:text-sm text-slate-500">
-                  <Calendar className="w-3.5 h-3.5 md:w-4 md:h-4" />
-                  Обновлено сегодня
-                </div>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-5 mb-8 lg:mb-10 max-w-4xl">
-                {positions.map((position, index) => (
-                  <div key={index} className="group rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 border border-slate-100 cursor-pointer">
-                    <div className="h-48 relative overflow-hidden">
-                      <img 
-                        src={position.image}
-                        alt={position.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                    </div>
-                    <div className="p-5">
-                      <div className="flex items-center justify-between mb-3">
-                        <h3 className="text-lg font-semibold text-slate-900">{position.name}</h3>
-                        <div className="text-right">
-                          <div className="text-base font-bold text-slate-900 whitespace-nowrap">от {position.rate} ₽</div>
-                          <div className="text-xs text-slate-500">за час</div>
-                        </div>
-                      </div>
-                      <div className="flex flex-wrap gap-1.5 mb-4">
-                        {position.tags.map((tag, i) => (
-                          <span key={i} className="bg-slate-50 text-slate-700 px-2 py-1 rounded-lg text-xs border border-slate-200">{tag}</span>
-                        ))}
-                      </div>
-                      <div className="flex gap-2">
-                        <button 
-                          onClick={() => setCurrentPage('job')}
-                          className="flex-1 bg-yellow-400 text-slate-900 py-2.5 rounded-lg hover:bg-yellow-500 transition-all text-sm font-semibold cursor-pointer"
-                        >
-                          Заказать персонал
-                        </button>
-                        <button 
-                          onClick={() => setCurrentPage('job')}
-                          className="px-3 bg-white rounded-lg text-slate-700 hover:bg-slate-100 transition-colors text-xs cursor-pointer border-2 border-slate-200">
-                          Детали
-                        </button>
-                      </div>
-                    </div>
+      {/* FAQ */}
+      <section className="py-20 lg:py-28 bg-slate-50">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6">Частые вопросы</h2>
+              <p className="text-xl text-slate-600">
+                Ответы на популярные вопросы о наших услугах
+              </p>
+            </div>
+
+            <div className="space-y-4">
+              {[
+                'Как быстро вы можете предоставить персонал?',
+                'Какие документы нужны для начала сотрудничества?',
+                'Проводите ли вы проверку кандидатов?',
+                'Как происходит оплата услуг?',
+                'Что делать, если сотрудник не подошёл?',
+                'В каких городах вы работаете?'
+              ].map((question, idx) => (
+                <div key={idx} className="bg-white rounded-2xl p-7 hover:shadow-lg transition-all cursor-pointer group">
+                  <div className="flex items-center justify-between gap-6">
+                    <span className="text-lg font-medium text-slate-900">{question}</span>
+                    <ChevronDown className="w-6 h-6 text-slate-400 group-hover:text-yellow-500 transition-colors flex-shrink-0" />
                   </div>
-                ))}
-              </div>
-
-              {/* All positions chips */}
-              <div className="pt-6 border-t border-slate-100">
-                <h3 className="text-base md:text-lg font-semibold text-slate-900 mb-4">Все доступные должности</h3>
-                <div className="flex flex-wrap gap-2">
-                  {allPositionChips.map((position, index) => (
-                    <button
-                      key={index}
-                      className="px-3 md:px-4 py-1.5 md:py-2 bg-slate-50 text-slate-700 hover:bg-blue-50 hover:text-blue-700 rounded-lg text-xs md:text-sm transition-all cursor-pointer"
-                    >
-                      {position}
-                    </button>
-                  ))}
                 </div>
-              </div>
+              ))}
             </div>
+          </div>
+        </div>
+      </section>
 
-            {/* How We Work */}
-            <div className="rounded-2xl lg:rounded-3xl p-6 lg:p-10 text-white overflow-hidden relative bg-slate-900">
-              <h2 className="text-2xl md:text-3xl font-bold mb-6 lg:mb-10">
-                Как мы подбираем персонал
+      {/* CTA */}
+      <section id="contacts" className="py-20 lg:py-28">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+          <div className="bg-slate-900 rounded-3xl p-12 lg:p-20 text-white relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-1/2 h-full bg-yellow-400/10 rounded-full blur-3xl" />
+            
+            <div className="relative z-10 max-w-3xl">
+              <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+                Готовы начать работу с нами?
               </h2>
-              
-              <div className="relative">
-                {/* Dotted lines - hidden on mobile */}
-                <div className="hidden md:block absolute top-8 left-0 right-0 h-0.5">
-                  <svg className="w-full h-full" preserveAspectRatio="none">
-                    <line 
-                      x1="12%" 
-                      y1="0" 
-                      x2="88%" 
-                      y2="0" 
-                      stroke="rgba(251, 191, 36, 0.2)" 
-                      strokeWidth="2" 
-                      strokeDasharray="8,8"
-                    />
-                  </svg>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 relative">
-                  <div className="space-y-3 lg:space-y-4">
-                    <div className="w-16 h-16 lg:w-[72px] lg:h-[72px] rounded-2xl flex items-center justify-center bg-yellow-400 shadow-lg">
-                      <Search className="w-7 h-7 lg:w-8 lg:h-8 text-slate-900" />
-                    </div>
-                    <h3 className="text-base md:text-lg font-semibold">Анализ потребности</h3>
-                    <p className="text-slate-400 text-sm">Изучаем ваши требования, объём работ и условия</p>
-                    <div className="flex items-center gap-2 text-xs text-slate-500">
-                      <Clock className="w-3.5 h-3.5" />
-                      Консультация 15 минут
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-3 lg:space-y-4">
-                    <div className="w-16 h-16 lg:w-[72px] lg:h-[72px] rounded-2xl flex items-center justify-center bg-yellow-400 shadow-lg">
-                      <Users className="w-7 h-7 lg:w-8 lg:h-8 text-slate-900" />
-                    </div>
-                    <h3 className="text-base md:text-lg font-semibold">Подбор персонала</h3>
-                    <p className="text-slate-400 text-sm">Находим подходящих специалистов из базы 100 000+ кандидатов</p>
-                    <div className="flex items-center gap-2 text-xs text-slate-500">
-                      <Users className="w-3.5 h-3.5" />
-                      Проверенная база
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-3 lg:space-y-4">
-                    <div className="w-16 h-16 lg:w-[72px] lg:h-[72px] rounded-2xl flex items-center justify-center bg-yellow-400 shadow-lg">
-                      <Rocket className="w-7 h-7 lg:w-8 lg:h-8 text-slate-900" />
-                    </div>
-                    <h3 className="text-base md:text-lg font-semibold">Вывод на объект</h3>
-                    <p className="text-slate-400 text-sm">Организуем выход персонала и контролируем работу</p>
-                    <div className="flex items-center gap-2 text-xs text-slate-500">
-                      <Shield className="w-3.5 h-3.5" />
-                      С гарантией качества
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Geography */}
-            <div className="bg-white rounded-2xl lg:rounded-3xl p-6 lg:p-10">
-              <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-8 lg:mb-10">География наших проектов</h2>
-
-              {/* Map */}
-              <div className="mb-10 lg:mb-12">
-                <img 
-                  src={imgRussiaMap}
-                  alt="Russia Map"
-                  className="w-full h-auto"
-                />
-              </div>
-
-              {/* Stats Grid - clean like in design */}
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-12 lg:mb-16">
-                {/* Всего городов */}
-                <div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center flex-shrink-0">
-                      <Building2 className="w-5 h-5 text-yellow-400" />
-                    </div>
-                    <span className="text-sm text-slate-700 font-medium">Всего городов</span>
-                  </div>
-                  <div className="text-3xl lg:text-4xl font-bold text-slate-900">85</div>
-                </div>
-                
-                {/* Выведено людей */}
-                <div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center flex-shrink-0">
-                      <Users className="w-5 h-5 text-yellow-400" />
-                    </div>
-                    <span className="text-sm text-slate-700 font-medium">Выведено людей</span>
-                  </div>
-                  <div className="text-3xl lg:text-4xl font-bold text-slate-900">25 000+</div>
-                </div>
-                
-                {/* Проектов */}
-                <div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center flex-shrink-0">
-                      <Award className="w-5 h-5 text-yellow-400" />
-                    </div>
-                    <span className="text-sm text-slate-700 font-medium">Проектов</span>
-                  </div>
-                  <div className="text-3xl lg:text-4xl font-bold text-slate-900">500+</div>
-                </div>
-                
-                {/* Рост в 2024 */}
-                <div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="w-10 h-10 rounded-full bg-yellow-400 flex items-center justify-center flex-shrink-0">
-                      <TrendingUp className="w-5 h-5 text-slate-900" />
-                    </div>
-                    <span className="text-sm text-slate-700 font-medium">Рост в 2024</span>
-                  </div>
-                  <div className="text-3xl lg:text-4xl font-bold text-yellow-500">+35%</div>
-                </div>
-              </div>
-
-              {/* Cities List */}
-              <div>
-                <h3 className="text-lg font-semibold text-slate-900 mb-6">Основные города присутствия</h3>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-x-8 gap-y-5">
-                  {[
-                    { name: 'Москва', count: '150+ проектов' },
-                    { name: 'Санкт-Петербург', count: '120+ проектов' },
-                    { name: 'Казань', count: '80+ проектов' },
-                    { name: 'Екатеринбург', count: '90+ проектов' },
-                    { name: 'Новосибирск', count: '60+ проектов' },
-                  ].map((city, i) => (
-                    <div key={i}>
-                      <div className="font-semibold text-slate-900 mb-1">{city.name}</div>
-                      <div className="text-sm text-slate-500">{city.count}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* FAQ */}
-            <div className="bg-white rounded-2xl lg:rounded-3xl p-6 lg:p-10">
-              <h2 className="text-2xl md:text-3xl font-bold mb-6 lg:mb-8 text-slate-900">Ответили на ваши вопросы</h2>
-              
-              <div className="space-y-3">
-                {[
-                  'Как быстро вы можете предоставить персонал?',
-                  'Какие документы нужны для начала работы?',
-                  'Проводите ли вы проверку кандидатов?',
-                  'Как происходит оплата услуг?',
-                  'Что делать, если сотрудник не подошёл?'
-                ].map((question, index) => (
-                  <div key={index} className="bg-slate-50 rounded-lg lg:rounded-xl p-4 lg:p-5 hover:bg-slate-100 transition-colors cursor-pointer group">
-                    <div className="flex items-center justify-between gap-4">
-                      <span className="text-sm md:text-base text-slate-700">{question}</span>
-                      <ChevronDown className="w-4 h-4 lg:w-5 lg:h-5 text-slate-400 group-hover:text-slate-600 transition-colors flex-shrink-0" />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* CTA Form */}
-            <div className="rounded-2xl lg:rounded-3xl p-6 lg:p-10 text-white bg-slate-900">
-              <h2 className="text-2xl md:text-3xl font-bold mb-3 lg:mb-4">
-                Нужен персонал для вашего склада?
-              </h2>
-              <p className="text-base md:text-lg text-white/90 mb-6 lg:mb-8">
+              <p className="text-xl text-slate-300 mb-12 leading-relaxed">
                 Оставьте заявку и получите расчёт стоимости в течение 15 минут
               </p>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-4 mb-6">
+              <div className="grid md:grid-cols-2 gap-4 mb-6">
                 <input
                   type="text"
                   placeholder="Ваше имя"
-                  className="px-4 py-3 rounded-lg lg:rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:border-yellow-400 text-sm md:text-base"
+                  className="px-6 py-4 rounded-xl bg-white/10 border-2 border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-yellow-400 text-lg"
                 />
                 <input
                   type="tel"
                   placeholder="Телефон"
-                  className="px-4 py-3 rounded-lg lg:rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:border-yellow-400 text-sm md:text-base"
+                  className="px-6 py-4 rounded-xl bg-white/10 border-2 border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-yellow-400 text-lg"
                 />
               </div>
 
-              <button className="w-full bg-yellow-400 text-slate-900 py-3 lg:py-4 rounded-lg lg:rounded-xl hover:bg-yellow-500 transition-all mb-3 font-semibold cursor-pointer text-sm md:text-base">
-                Получить расчёт стоимости
+              <input
+                type="text"
+                placeholder="Какой персонал нужен?"
+                className="w-full px-6 py-4 rounded-xl bg-white/10 border-2 border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-yellow-400 text-lg mb-8"
+              />
+
+              <button className="bg-yellow-400 text-slate-900 px-12 py-5 rounded-2xl hover:bg-yellow-500 transition-all font-bold text-lg cursor-pointer flex items-center gap-3">
+                <Send className="w-5 h-5" />
+                Отправить заявку
               </button>
 
-              <p className="text-xs text-white/60 text-center">
+              <p className="text-sm text-slate-400 mt-6">
                 Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности
               </p>
             </div>
           </div>
-
-          {/* Right Sidebar */}
-          <div className="space-y-6 lg:block hidden">
-            {/* Services Menu */}
-            <div className="bg-white rounded-2xl p-6 border border-slate-100">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-semibold text-slate-900">Услуги</h3>
-              </div>
-              
-              <div className="space-y-3 text-sm">
-                <div className="text-slate-600 hover:text-slate-900 cursor-pointer transition-colors py-2">
-                  Аутсорсинг персонала
-                </div>
-                
-                <div className="space-y-2 pl-4 border-l-2 border-yellow-400 bg-amber-50 rounded-r-xl py-2 pr-3">
-                  <div className="text-slate-900 cursor-pointer py-1.5 flex items-center justify-between font-semibold">
-                    <span>Персонал на склад</span>
-                    <span className="bg-slate-900 text-yellow-400 px-2 py-0.5 rounded-md text-xs font-bold">48</span>
-                  </div>
-                  <div className="text-slate-600 hover:text-slate-900 cursor-pointer transition-colors py-1.5">
-                    Персонал на производство
-                  </div>
-                  <div className="text-slate-600 hover:text-slate-900 cursor-pointer transition-colors py-1.5">
-                    Персонал на стройку
-                  </div>
-                  <div className="text-slate-600 hover:text-slate-900 cursor-pointer transition-colors py-1.5">
-                    Пищевые предприятия
-                  </div>
-                  <div className="text-slate-600 hover:text-slate-900 cursor-pointer transition-colors py-1.5">
-                    Персонал на металургию
-                  </div>
-                </div>
-                
-                <div className="text-slate-600 hover:text-slate-900 cursor-pointer transition-colors py-2 pt-4">
-                  Аутстаффинг персонала
-                </div>
-              </div>
-            </div>
-
-            {/* Contact Card */}
-            <div className="rounded-2xl p-8 text-white bg-slate-900">
-              <div className="flex items-center gap-3 mb-6">
-                <img 
-                  src={imgPhotosOfAGirlFromTechnicalSupportSittingInAnOfficeWearingHeadphonesWithAMicrophoneGreenBackground}
-                  alt="Support"
-                  className="w-16 h-16 rounded-xl object-cover ring-2 ring-yellow-400/30"
-                />
-                <img 
-                  src={imgPhotosOfAGirlFromTechnicalSupportSittingInAnOfficeWearingHeadphonesWithAMicrophoneGreenBackground1}
-                  alt="Support"
-                  className="w-16 h-16 rounded-xl object-cover ring-2 ring-yellow-400/30 -ml-6"
-                />
-                <div className="flex items-center gap-1 bg-yellow-400/20 text-yellow-300 px-2 py-1 rounded-lg text-xs font-medium">
-                  <div className="w-1.5 h-1.5 bg-yellow-400 rounded-full animate-pulse" />
-                  Онлайн
-                </div>
-              </div>
-              
-              <p className="text-white/90 text-sm mb-1">Анастасия К., Елена Р.</p>
-              <div className="text-xs text-white/60 mb-6">Эксперты по подбору</div>
-              
-              <p className="text-lg mb-6">
-                Оставьте обращение и мы позвоним вам <span className="text-yellow-400 font-semibold">в течение 15 минут</span>
-              </p>
-              
-              <button className="w-full bg-yellow-400 text-slate-900 py-4 rounded-xl hover:bg-yellow-500 transition-all mb-3 font-semibold cursor-pointer">
-                Получить консультацию
-              </button>
-              
-              <div className="flex items-center justify-center gap-2 text-xs text-white/60">
-                <Clock className="w-3.5 h-3.5" />
-                Среднее время ответа: 8 мин
-              </div>
-            </div>
-
-            {/* Info widget */}
-            <div className="bg-amber-50 rounded-2xl p-5 border border-yellow-200">
-              <div className="flex items-center gap-2 mb-3">
-                <MessageCircle className="w-5 h-5 text-slate-900" />
-                <span className="text-slate-900 text-sm font-semibold">Бесплатная консультация</span>
-              </div>
-              <p className="text-sm text-slate-700 mb-3">Подберём персонал под ваши задачи и рассчитаем стоимость</p>
-              <div className="flex items-center gap-2 text-xs text-slate-600">
-                <Check className="w-4 h-4" />
-                <span>Без обязательств</span>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
+      </section>
 
       {/* Footer */}
-      <footer className="bg-slate-900 text-white py-12 lg:py-16 mt-12 lg:mt-20">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-8 lg:mb-12">
+      <footer className="bg-slate-900 text-white py-16">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
             <div>
-              <div className="flex items-center gap-2.5 mb-6">
+              <div className="flex items-center gap-3 mb-6">
                 <div className="w-10 h-10 rounded-xl bg-yellow-400 flex items-center justify-center">
                   <span className="text-xl font-bold text-slate-900">S</span>
                 </div>
-                <span className="text-2xl font-semibold">StaffPro</span>
+                <span className="text-2xl font-bold">StaffPro</span>
               </div>
-              <p className="text-slate-400 text-sm mb-4">Профессиональный подбор персонала для вашего бизнеса</p>
+              <p className="text-slate-400 mb-6">Профессиональный подбор персонала для вашего бизнеса</p>
+              <div className="flex gap-4">
+                <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors cursor-pointer">
+                  <span className="text-lg">VK</span>
+                </div>
+                <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors cursor-pointer">
+                  <span className="text-lg">TG</span>
+                </div>
+              </div>
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4">Услуги</h4>
-              <ul className="space-y-2 text-slate-400 text-sm">
+              <h4 className="font-bold mb-6">Услуги</h4>
+              <ul className="space-y-3 text-slate-400">
                 <li className="hover:text-white cursor-pointer transition-colors">Аутсорсинг персонала</li>
                 <li className="hover:text-white cursor-pointer transition-colors">Аутстаффинг персонала</li>
                 <li className="hover:text-white cursor-pointer transition-colors">Подбор персонала</li>
+                <li className="hover:text-white cursor-pointer transition-colors">Лизинг персонала</li>
               </ul>
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4">Компания</h4>
-              <ul className="space-y-2 text-slate-400 text-sm">
+              <h4 className="font-bold mb-6">Компания</h4>
+              <ul className="space-y-3 text-slate-400">
                 <li className="hover:text-white cursor-pointer transition-colors">О нас</li>
+                <li className="hover:text-white cursor-pointer transition-colors">Кейсы</li>
                 <li className="hover:text-white cursor-pointer transition-colors">Новости</li>
                 <li className="hover:text-white cursor-pointer transition-colors">Контакты</li>
               </ul>
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4">Контакты</h4>
-              <div className="space-y-2 text-slate-400 text-sm">
-                <p>8 800 000 00 00</p>
+              <h4 className="font-bold mb-6">Контакты</h4>
+              <div className="space-y-3 text-slate-400">
+                <p className="font-semibold text-white text-lg">8 800 000 00 00</p>
                 <p>info@staffpro.ru</p>
-                <div className="flex items-center gap-1 mt-3 text-green-400">
-                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                <p>Москва, ул. Примерная, 123</p>
+                <div className="flex items-center gap-2 text-yellow-400 pt-2">
+                  <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse" />
                   Работаем 24/7
                 </div>
               </div>
             </div>
           </div>
           
-          <div className="border-t border-slate-800 pt-6 lg:pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-slate-500 text-sm text-center md:text-left">&copy; 2025 StaffPro. Все права защищены.</p>
-            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-slate-500 text-sm">
-              <a href="#" className="hover:text-white transition-colors cursor-pointer text-center">Политика конфиденциальности</a>
-              <a href="#" className="hover:text-white transition-colors cursor-pointer text-center">Условия использования</a>
+          <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <p className="text-slate-500 text-center md:text-left">&copy; 2025 StaffPro. Все права защищены.</p>
+            <div className="flex gap-8 text-slate-500">
+              <a href="#" className="hover:text-white transition-colors cursor-pointer">Политика конфиденциальности</a>
+              <a href="#" className="hover:text-white transition-colors cursor-pointer">Условия использования</a>
             </div>
           </div>
         </div>
